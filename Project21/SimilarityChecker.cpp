@@ -28,7 +28,7 @@ private:
 
 	bool isTwiceDifferentStringNum(int length1, int length2)
 	{
-		return length1 / 2 >= length2 || length2 / 2 >= length1;
+		return (length1 / 2 >= length2) || (length2 / 2 >= length1);
 	}
 
 	int calcPartScore(int& length1, int& length2)
