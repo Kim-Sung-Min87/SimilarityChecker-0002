@@ -10,14 +10,28 @@ public:
 		int length1 = str1.length();
 		int length2 = str2.length();
 
-		if (length1 == length2) return 60;
+		if (length1 == length2) return LENGTH_SIMILARITY_MAX_SCORE;
+		if (isTwiceDifferentStringNum(length1, length2)) return LENGTH_SIMILARITY_MIN_SCORE;
 
-		if (length1 / 2 >= length2 || length2 / 2 >= length1) return 0;
+		return calcPartScore(length1, length2);
+	}
 
+private:
+
+	static const int LENGTH_SIMILARITY_MAX_SCORE = 60;
+	static const int LENGTH_SIMILARITY_MIN_SCORE = 0;
+
+	int calcPartScore(int& length1, int& length2)
+	{
 		int shorter = std::min(length1, length2);
 		int gap = std::abs(length1 - length2);
 
-		return 60 * (1 - (double)gap / shorter);
+		return LENGTH_SIMILARITY_MAX_SCORE * (1 - (double)gap / shorter);
+	}
+
+	bool isTwiceDifferentStringNum(int length1, int length2)
+	{
+		return length1 / 2 >= length2 || length2 / 2 >= length1;
 	}
 
 };
